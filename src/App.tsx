@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import {Header} from "./components/Header/Header";
+import {SearchBar} from "./components/SearchBar/SearchBar";
+import {MoviePage} from "./components/MoviePage/MoviePage";
+import {Slider} from "./components/Slider/Slider";
+import {movieAPI} from "./api/movie";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export const App = () => {
+    console.log(process.env.REACT_APP_API_KEY)
+    const getPopularMovie = () => {
+        movieAPI.getPopularMovies();
+    }
+    return (
+        <div className="app">
+            <Header/>
+            <Slider/>
+            <SearchBar/>
+            <MoviePage/>
+            <button onClick={getPopularMovie}>get</button>
+        </div>
+    );
 }
 
-export default App;
