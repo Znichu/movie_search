@@ -4,12 +4,16 @@ import {Header} from "./components/Header/Header";
 import {SearchBar} from "./components/SearchBar/SearchBar";
 import {MoviePage} from "./components/MoviePage/MoviePage";
 import {Slider} from "./components/Slider/Slider";
-import {movieAPI} from "./api/movie";
+import {useDispatch} from "react-redux";
+import {requestPopularMovies, requestUpcomingMovies} from "./store/movie-reducer";
 
 export const App = () => {
-    console.log(process.env.REACT_APP_API_KEY)
+    const dispatch = useDispatch();
     const getPopularMovie = () => {
-        movieAPI.getPopularMovies();
+        dispatch(requestPopularMovies())
+    }
+    const getUpcomingMovies = () => {
+        dispatch(requestUpcomingMovies())
     }
     return (
         <div className="app">
@@ -17,7 +21,8 @@ export const App = () => {
             <Slider/>
             <SearchBar/>
             <MoviePage/>
-            <button onClick={getPopularMovie}>get</button>
+            <button onClick={getPopularMovie}>get popular</button>
+            <button onClick={getUpcomingMovies} >get upcoming</button>
         </div>
     );
 }

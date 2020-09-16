@@ -1,9 +1,11 @@
 import { ThunkAction } from "redux-thunk";
 import { InferActionTypes, RootState } from "./store";
 import { movieAPI } from "../api/movie";
+import {MovieType} from "../type/types";
 
 let initialState = {
-    popularMovies: [],
+    popularMovies: [] as MovieType[],
+    upcomingMovies: [] as MovieType[],
     movies: [] as Array<MovieType>,
     totalCount: 0,
     currentPage: 1,
@@ -16,15 +18,20 @@ let initialState = {
 //Reducer
 export const MoviesReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case "SET_MOVIES":
-            return { ...state,
-                movies: action.movies,
-                searchTitle: state.newTitle
-            };
+        case "SET_POPULAR_MOVIES": {
+            return {
+                ...state,
+                popularMovies: action.movies
+            }
+        }
+        case "SET_UPCOMING_MOVIES": {
+            return {
+                ...state,
+                upcomingMovies: action.movies
+            }
+        }
         case "SET_CURRENT_PAGE":
             return { ...state, currentPage: action.numberPage };
-        case "SET_TOTAL_COUNT":
-            return { ...state, totalCount: action.totalCount };
         case "TOGGLE_IS_FETCHING":
             return { ...state, isFetching: action.isFetching };
         case "SET_SEARCH_NEW_TITLE":
@@ -37,52 +44,39 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
 };
 
 //Actions
-export const action = {
-    setMoviesAndTitle: (movies: Array<MovieType>) =>
-        ({ type: "SET_MOVIES", movies } as const),
-    setCurrentPage: (numberPage: number) =>
-        ({ type: "SET_CURRENT_PAGE", numberPage } as const),
-    setTotalCount: (totalCount: number ) =>
-        ({ type: "SET_TOTAL_COUNT", totalCount } as const),
-    toggleIsFetching: (isFetching: boolean) =>
-        ({ type: "TOGGLE_IS_FETCHING", isFetching } as const),
-    setSearchTitle: (newTitle: string) =>
-        ({ type: "SET_SEARCH_NEW_TITLE", newTitle } as const),
-    setNotFound: (notFound: boolean) =>
-        ({ type: "SET_NOT_FOUND", notFound } as const)
+export const actions = {
+    setPopularMovies: (movies: MovieType[]) => ({ type: "SET_POPULAR_MOVIES", movies } as const),
+    setUpcomingMovies: (movies: MovieType[] ) => ({ type: "SET_UPCOMING_MOVIES", movies } as const),
+    setCurrentPage: (numberPage: number) => ({ type: "SET_CURRENT_PAGE", numberPage } as const),
+    toggleIsFetching: (isFetching: boolean) => ({ type: "TOGGLE_IS_FETCHING", isFetching } as const),
+    setSearchTitle: (newTitle: string) => ({ type: "SET_SEARCH_NEW_TITLE", newTitle } as const),
+    setNotFound: (notFound: boolean) => ({ type: "SET_NOT_FOUND", notFound } as const)
 };
 
 //Thunk
-export const requestMovies = (
-    title: string,
-    currentPage: number
-): ThunkType => async (dispatch) => {
+export const requestPopularMovies = (): ThunkType => async (dispatch) => {
     try {
-        dispatch(action.setCurrentPage(currentPage));
-        dispatch(action.toggleIsFetching(true));
-        let data = await movieAPI.getPopularMovies(currentPage);
-        if (data.Response === "True") {
-            dispatch(action.setMoviesAndTitle(data.Search));
-            dispatch(action.setTotalCount(data.totalResults));
-            dispatch(action.setNotFound(false));
-        } else {
-            dispatch(action.setNotFound(true));
-            dispatch(action.setTotalCount(0));
-        }
+/*        dispatch(actions.setCurrentPage(currentPage));*/
+        dispatch(actions.toggleIsFetching(true));
+        let data = await movieAPI.getPopularMovies();
+        dispatch(actions.setPopularMovies(data.results))
     } catch (e) {
         console.log(e.message);
     }
-    dispatch(action.toggleIsFetching(false));
+    dispatch(actions.toggleIsFetching(false));
 };
+export const requestUpcomingMovies = (): ThunkType => async (dispatch) => {
+    try {
+        dispatch(actions.toggleIsFetching(true));
+        const data = await movieAPI.getUpcomingMovies();
+        dispatch(actions.setUpcomingMovies(data.results))
+    } catch (e) {
+        console.log(e.message)
+    }
+    dispatch(actions.toggleIsFetching(false))
+}
 
 //Types
 type InitialStateType = typeof initialState;
 type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsTypes>;
-type ActionsTypes = InferActionTypes<typeof action>;
-type MovieType = {
-    Title: string;
-    Year: string;
-    imdbID: string;
-    Type: string;
-    Poster: string;
-};
+type ActionsTypes = InferActionTypes<typeof actions>;
