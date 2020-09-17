@@ -1,18 +1,23 @@
-import React from "react";
-import style from "./Header.module.scss"
-import moviedb from "../../assets/img/moviedb.png"
+import React, {useState} from "react";
+import RMDBLogo from "../../assets/img/reactMovie_logo.png"
+import TMDBLogo from "../../assets/img/tmdb_logo.svg"
+import {StyledHeader, StyledRMDBLogo, StyledTMDBLogo} from "../../styles/StyledHeader";
 
 export const Header = () => {
+
+    const [visibleInput, setvisibleInput] = useState(false)
+
+    const changeVisible = () => {
+        setvisibleInput(!visibleInput)
+    }
+
     return (
-        <div className={style.header}>
-            <div className={style.container}>
-                <div className={style.header__logo}>
-                    <span>React Movie Search</span>
-                </div>
-                <div className={style.header__api}>
-                    <img src={moviedb} alt="moviedb"/>
-                </div>
+        <StyledHeader>
+            <div className="header-content">
+                <StyledRMDBLogo src={RMDBLogo} />
+                <StyledTMDBLogo src={TMDBLogo} />
             </div>
-        </div>
+
+        </StyledHeader>
     )
 }

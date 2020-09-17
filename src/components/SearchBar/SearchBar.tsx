@@ -3,12 +3,9 @@ import style from "./SearchBar.module.scss"
 
 export const SearchBar = () => {
     return (
-        <div className={style.search}>
-            <div className={style.container}>
-                <div>
-                    <input type="text"/>
-                </div>
-            </div>
-        </div>
+        <>
+            <input className={style.searchInput} type="text" placeholder="Search for a movie"/>
+            <button className={style.searchButton}>search</button>
+        </>
     )
 }
