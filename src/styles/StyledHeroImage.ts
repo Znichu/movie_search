@@ -34,7 +34,6 @@ export const StyledHeroImage = styled.div<{image: string}>`
     color: #fff;
 
     h1 {
-      font-family: 'Abel', sans-serif;
       font-size: 48px;
       color: #fff;
 
@@ -45,7 +44,6 @@ export const StyledHeroImage = styled.div<{image: string}>`
     }
 
     p {
-      font-family: 'Abel', sans-serif;
       font-size: 22px;
       line-height: 26px;
       color: #fff;

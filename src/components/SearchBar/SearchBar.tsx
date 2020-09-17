@@ -1,11 +1,14 @@
 import React from "react";
-import style from "./SearchBar.module.scss"
+import {StyledSearchBar, StyledSearchBarContent} from "../../styles/StyledSearchBar";
 
 export const SearchBar = () => {
     return (
         <>
-            <input className={style.searchInput} type="text" placeholder="Search for a movie"/>
-            <button className={style.searchButton}>search</button>
+            <StyledSearchBar>
+                <StyledSearchBarContent>
+                    <input type="text" placeholder="Search Movie"/>
+                </StyledSearchBarContent>
+            </StyledSearchBar>
         </>
     )
 }

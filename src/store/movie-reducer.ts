@@ -6,6 +6,7 @@ import {MovieType} from "../type/types";
 let initialState = {
     popularMovies: [] as MovieType[],
     upcomingMovies: [] as MovieType[],
+    heroImage: {} as MovieType,
     movies: [] as Array<MovieType>,
     totalCount: 0,
     currentPage: 1,
@@ -30,6 +31,12 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
                 upcomingMovies: action.movies
             }
         }
+        case "SET_HERO_IMAGE": {
+            return {
+                ...state,
+                heroImage: action.movie
+            }
+        }
         case "SET_CURRENT_PAGE":
             return { ...state, currentPage: action.numberPage };
         case "TOGGLE_IS_FETCHING":
@@ -47,6 +54,7 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
 export const actions = {
     setPopularMovies: (movies: MovieType[]) => ({ type: "SET_POPULAR_MOVIES", movies } as const),
     setUpcomingMovies: (movies: MovieType[] ) => ({ type: "SET_UPCOMING_MOVIES", movies } as const),
+    setHeroImage: (movie: MovieType ) => ({ type: "SET_HERO_IMAGE", movie } as const),
     setCurrentPage: (numberPage: number) => ({ type: "SET_CURRENT_PAGE", numberPage } as const),
     toggleIsFetching: (isFetching: boolean) => ({ type: "TOGGLE_IS_FETCHING", isFetching } as const),
     setSearchTitle: (newTitle: string) => ({ type: "SET_SEARCH_NEW_TITLE", newTitle } as const),
@@ -55,10 +63,14 @@ export const actions = {
 
 //Thunk
 export const requestPopularMovies = (): ThunkType => async (dispatch) => {
+
+    let index = Math.floor(Math.random() * (20 + 1 - 1));
+
     try {
 /*        dispatch(actions.setCurrentPage(currentPage));*/
         dispatch(actions.toggleIsFetching(true));
         let data = await movieAPI.getPopularMovies();
+        dispatch(actions.setHeroImage(data.results[index]))
         dispatch(actions.setPopularMovies(data.results))
     } catch (e) {
         console.log(e.message);

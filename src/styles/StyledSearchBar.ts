@@ -28,8 +28,7 @@ export const StyledSearchBarContent = styled.div`
   }
 
   input {
-    font-family: 'Abel', sans-serif;
-    font-size: 28px;
+    font-size: 18px;
     position: absolute;
     left: 0px;
     margin: 8px 0;

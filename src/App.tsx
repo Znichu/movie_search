@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import {requestPopularMovies, requestUpcomingMovies} from "./store/movie-reducer";
 import {Header} from "./components/Header/Header";
 import {GlobalStyle} from "./styles/GlobalStyle";
+import {MoviePage} from "./components/MoviePage/MoviePage";
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export const App = () => {
     return (
         <>
             <Header/>
+            <MoviePage/>
             <GlobalStyle/>
         </>
     );
