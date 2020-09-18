@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const StyledGrid = styled.div`
-  max-width: 1280px;
   margin: 0 auto;
   padding: 0 20px;
   h1 {
-    font-family: 'Abel', sans-serif;
-    font-size: 42px;
+    font-size: 30px;
+    padding-left: 55px;
+    color: #2196F3;
 
     @media screen and (max-width: 768px) {
       font-size: 22px;
@@ -18,7 +18,6 @@ export const StyledGridContent = styled.div`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
 
   @media screen and (max-width: 1024px) {

@@ -11,19 +11,18 @@ import {MovieCard} from "./MovieCard/MovieCard";
 
 export const MoviePage = () => {
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(requestPopularMovies())
-    }, [dispatch]);
-
     const popular = useSelector((state: RootState) => state.movie.heroImage);
-    const popularMovies = useSelector((state: RootState) => state.movie.popularMovies)
+    const popularMovies = useSelector((state: RootState) => state.movie.popularMovies.movies)
+    const topRatedMovies = useSelector((state: RootState) => state.movie.topRatedMovies.movies)
 
-    const movie = popularMovies.map(m => <MovieCard img={m.poster_path}
+    const moviePopular = popularMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
                                                     title={m.title}
                                                     rating={m.vote_average}
                                                     id={m.id}/>)
+    const movieTopRotade = topRatedMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
+                                                                          title={m.title}
+                                                                          rating={m.vote_average}
+                                                                          id={m.id}/>)
 
     return (
         <>
@@ -33,9 +32,15 @@ export const MoviePage = () => {
             />
             <SearchBar/>
             <StyledGrid>
-                <h1>Popular</h1>
+                <h1>#Popular</h1>
                 <StyledGridContent>
-                    {movie}
+                    {moviePopular}
+                </StyledGridContent>
+            </StyledGrid>
+            <StyledGrid>
+                <h1>#Top rated</h1>
+                <StyledGridContent>
+                    {movieTopRotade}
                 </StyledGridContent>
             </StyledGrid>
         </>
