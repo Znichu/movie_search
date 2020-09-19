@@ -4,8 +4,9 @@ import {HeroImage} from "../HeroImage/HeroImage";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {BACKDROP_SIZE, IMAGE_BASE_URL} from "../../commons/config";
-import {StyledGrid, StyledGridContent} from "../../styles/StyledGrid";
-import {MovieCard} from "./MovieCard/MovieCard";
+import {StyledGrid, StyledGridContent, StyledHeaderCategory} from "../../styles/StyledGrid";
+import {MovieCard} from "../MovieCard/MovieCard";
+import {Link} from "react-router-dom";
 
 
 export const MoviePage = () => {
@@ -16,14 +17,14 @@ export const MoviePage = () => {
     const upcomingMovies = useSelector((state: RootState) => state.movie.upcomingMovies.movies);
 
     const moviePopular = popularMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
-                                                    title={m.title}
-                                                    rating={m.vote_average}
-                                                    id={m.id}/>);
+                                                                       title={m.title}
+                                                                       rating={m.vote_average}
+                                                                       id={m.id}/>);
 
     const movieTopRated = topRatedMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
-                                                                          title={m.title}
-                                                                          rating={m.vote_average}
-                                                                          id={m.id}/>);
+                                                                         title={m.title}
+                                                                         rating={m.vote_average}
+                                                                         id={m.id}/>);
 
     const movieUpcoming = upcomingMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
                                                                          title={m.title}
@@ -38,19 +39,28 @@ export const MoviePage = () => {
             />
             <SearchBar/>
             <StyledGrid>
-                <h1>#Popular</h1>
+                <StyledHeaderCategory>
+                    <h1>#Popular</h1>
+                    <Link to="/popular">View all</Link>
+                </StyledHeaderCategory>
                 <StyledGridContent>
                     {moviePopular}
                 </StyledGridContent>
             </StyledGrid>
             <StyledGrid>
-                <h1>#Top rated</h1>
+                <StyledHeaderCategory>
+                    <h1>#Top rated</h1>
+                    <Link to="/top-rated">View all</Link>
+                </StyledHeaderCategory>
                 <StyledGridContent>
                     {movieTopRated}
                 </StyledGridContent>
             </StyledGrid>
             <StyledGrid>
-                <h1>#Upcoming</h1>
+                <StyledHeaderCategory>
+                    <h1>#Upcoming</h1>
+                    <Link to="/upcoming">View all</Link>
+                </StyledHeaderCategory>
                 <StyledGridContent>
                     {movieUpcoming}
                 </StyledGridContent>

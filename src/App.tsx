@@ -4,6 +4,10 @@ import {requestPopularMovies, requestTopRatedMovies, requestUpcomingMovies} from
 import {Header} from "./components/Header/Header";
 import {GlobalStyle} from "./styles/GlobalStyle";
 import {MoviePage} from "./components/MoviePage/MoviePage";
+import {Route, Switch} from 'react-router-dom';
+import {PopularMoviePage} from "./components/PopularMoviePage/PopularMoviePage";
+import {TopRatedMoviePage} from "./components/TopRatedMoviePage/TopRatedMoviePage";
+import {UpcomingMoviePage} from "./components/UpcomingMoviePage/UpcomingMoviePage";
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -17,7 +21,12 @@ export const App = () => {
     return (
         <>
             <Header/>
-            <MoviePage/>
+            <Switch>
+                <Route path="/" exact render={() => <MoviePage/>}/>
+                <Route path="/popular" exact render={() => <PopularMoviePage/>}/>
+                <Route path="/top-rated" exact render={() => <TopRatedMoviePage/>}/>
+                <Route path="/upcoming" exact render={() => <UpcomingMoviePage/>}/>
+            </Switch>
             <GlobalStyle/>
         </>
     );

@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./MovieCard.module.scss"
-import {IMAGE_BASE_URL, POSTER_SIZE} from "../../../commons/config";
+import {IMAGE_BASE_URL, POSTER_SIZE} from "../../commons/config";
 
 type PropsType = {
     img: string
