@@ -20,7 +20,7 @@ export const StyledHeader = styled.div`
 `;
 
 export const StyledRMDBLogo = styled.img`
-  width: 250px;
+  width: 200px;
   margin-top: 20px;
 
   @media screen and (max-width: 500px) {
@@ -30,7 +30,7 @@ export const StyledRMDBLogo = styled.img`
 `;
 
 export const StyledTMDBLogo = styled.img`
-  width: 122px;
+  width: 100px;
   margin-top: 25px;
   float: right;
 

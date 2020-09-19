@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export const StyledSearchBar = styled.div`
-  width: 100%;
-  height: 105px;
+  display: flex;
+  align-items: center;
+  height: 100px;
   background: #1c1c1c;
-  padding: 25px 20px 0px 20px;
-  box-sizing: border-box;
-  color: #fff;
+  padding: 0 20px;
 `;
 
 export const StyledSearchBarContent = styled.div`
+  position: relative;
   max-width: 1280px;
   width: 100%;
   height: 55px;
@@ -18,13 +18,12 @@ export const StyledSearchBarContent = styled.div`
   border-radius: 40px;
   position: relative;
   color: #fff;
-
-  .fa-search {
+  
+  img {
     position: absolute;
-    left: 20px;
-    top: 12px;
-    color: #fff;
-    z-index: 1000;
+    left: 15px;
+    top: 14px;
+    width: 30px;
   }
 
   input {
@@ -38,7 +37,6 @@ export const StyledSearchBarContent = styled.div`
     background: transparent;
     height: 40px;
     color: #fff;
-    box-sizing: border-box;
 
     :focus {
       outline: none;
