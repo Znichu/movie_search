@@ -8,20 +8,21 @@ let initialState = {
         movies: [] as Array<MovieType>,
         totalCount: 0,
         currentPage: 1,
+        totalPages: 0
     },
     upcomingMovies: {
         movies: [] as Array<MovieType>,
         totalCount: 0,
         currentPage: 1,
+        totalPages: 0
     },
     topRatedMovies: {
         movies: [] as Array<MovieType>,
         totalCount: 0,
         currentPage: 1,
+        totalPages: 0
     },
     heroImage: {} as MovieType,
-    totalCount: 0,
-    currentPage: 1,
     isFetching: false,
     notFound: false,
     searchTitle: "",
@@ -37,7 +38,8 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
                 popularMovies:  {
                     ...state.popularMovies,
                     movies: action.movies,
-                    totalCount: action.totalCount
+                    totalCount: action.totalCount,
+                    totalPages: action.totalPages
                 }
             }
         }
@@ -47,7 +49,8 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
                 upcomingMovies: {
                     ...state.upcomingMovies,
                     movies: action.movies,
-                    totalCount: action.totalCount
+                    totalCount: action.totalCount,
+                    totalPages: action.totalPages
                 }
             }
         }
@@ -57,7 +60,8 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
                 topRatedMovies: {
                     ...state.topRatedMovies,
                     movies: action.movies,
-                    totalCount: action.totalCount
+                    totalCount: action.totalCount,
+                    totalPages: action.totalPages
                 }
             }
         }
@@ -67,8 +71,6 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
                 heroImage: action.movie
             }
         }
-        case "SET_CURRENT_PAGE":
-            return { ...state, currentPage: action.numberPage };
         case "TOGGLE_IS_FETCHING":
             return { ...state, isFetching: action.isFetching };
         case "SET_SEARCH_NEW_TITLE":
@@ -82,9 +84,9 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
 
 //Actions
 export const actions = {
-    setPopularMovies: (movies: MovieType[], totalCount: number) => ({ type: "SET_POPULAR_MOVIES", movies, totalCount } as const),
-    setUpcomingMovies: (movies: MovieType[], totalCount: number ) => ({ type: "SET_UPCOMING_MOVIES", movies, totalCount } as const),
-    setTopRatedMovies: (movies: MovieType[], totalCount: number ) => ({ type: "SET_TOP_RATED_MOVIES", movies, totalCount } as const),
+    setPopularMovies: (movies: MovieType[], totalCount: number, totalPages: number) => ({ type: "SET_POPULAR_MOVIES", movies, totalCount, totalPages } as const),
+    setUpcomingMovies: (movies: MovieType[], totalCount: number, totalPages: number ) => ({ type: "SET_UPCOMING_MOVIES", movies, totalCount, totalPages } as const),
+    setTopRatedMovies: (movies: MovieType[], totalCount: number, totalPages: number ) => ({ type: "SET_TOP_RATED_MOVIES", movies, totalCount, totalPages } as const),
     setHeroImage: (movie: MovieType ) => ({ type: "SET_HERO_IMAGE", movie } as const),
     setCurrentPage: (numberPage: number) => ({ type: "SET_CURRENT_PAGE", numberPage } as const),
     toggleIsFetching: (isFetching: boolean) => ({ type: "TOGGLE_IS_FETCHING", isFetching } as const),
@@ -97,7 +99,7 @@ export const requestPopularMovies = (): ThunkType => async (dispatch) => {
     try {
         dispatch(actions.toggleIsFetching(true));
         let data = await movieAPI.getPopularMovies();
-        dispatch(actions.setPopularMovies(data.results, data.total_results));
+        dispatch(actions.setPopularMovies(data.results, data.total_results, data.total_pages));
     } catch (e) {
         console.log(e.message);
     }
@@ -110,7 +112,7 @@ export const requestUpcomingMovies = (): ThunkType => async (dispatch) => {
         dispatch(actions.toggleIsFetching(true));
         const data = await movieAPI.getUpcomingMovies();
         dispatch(actions.setHeroImage(data.results[index]));
-        dispatch(actions.setUpcomingMovies(data.results, data.total_results));
+        dispatch(actions.setUpcomingMovies(data.results, data.total_results, data.total_pages));
     } catch (e) {
         console.log(e.message)
     }
@@ -121,7 +123,7 @@ export const requestTopRatedMovies = (): ThunkType => async (dispatch) => {
     try {
         dispatch(actions.toggleIsFetching(true));
         let data = await movieAPI.getTopRatedMovies();
-        dispatch(actions.setTopRatedMovies(data.results, data.total_results));
+        dispatch(actions.setTopRatedMovies(data.results, data.total_results, data.total_pages));
     } catch (e) {
         console.log(e.message);
     }
