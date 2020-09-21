@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import {requestPopularMovies, requestTopRatedMovies, requestUpcomingMovies} from "./store/movie-reducer";
 import {Header} from "./components/Header/Header";
 import {GlobalStyle} from "./styles/GlobalStyle";
-import {MoviePage} from "./components/MoviePage/MoviePage";
+import {MoviesPage} from "./components/MoviesPage/MoviesPage";
 import {Route, Switch} from 'react-router-dom';
 import {PopularMoviePage} from "./components/PopularMoviePage/PopularMoviePage";
 import {TopRatedMoviePage} from "./components/TopRatedMoviePage/TopRatedMoviePage";
@@ -22,7 +22,7 @@ export const App = () => {
         <>
             <Header/>
             <Switch>
-                <Route path="/" exact render={() => <MoviePage/>}/>
+                <Route path="/" exact render={() => <MoviesPage/>}/>
                 <Route path="/popular" exact render={() => <PopularMoviePage/>}/>
                 <Route path="/top-rated" exact render={() => <TopRatedMoviePage/>}/>
                 <Route path="/upcoming" exact render={() => <UpcomingMoviePage/>}/>

@@ -7,7 +7,7 @@ let initialState = {
     movie: [] as MovieType[],
     totalResults: 0,
     currentPage: 1,
-    title: " ",
+    searchTerm: "",
     isFetching: false
 
 }
@@ -17,13 +17,14 @@ export const SearchMovieReducer = (state = initialState, action: ActionsType): I
         case "SET_SEARCH_MOVIE": {
             return {
                 ...state,
-                movie: action.movie
+                movie: action.movie,
+                totalResults: action.totalResults
             }
         }
         case "SET_SEARCH_TITLE": {
             return {
                 ...state,
-                title: action.title
+                searchTerm: action.title
             }
         }
         case "SET_TOGGLE_IS_FETCHING": {
@@ -39,8 +40,9 @@ export const SearchMovieReducer = (state = initialState, action: ActionsType): I
 
 //Actions
 export const actions = {
-    setSearchMovieResult: (movie: MovieType[]) => ({type: "SET_SEARCH_MOVIE", movie} as const),
+    setSearchMovieResult: (movie: MovieType[], totalResults: number) => ({type: "SET_SEARCH_MOVIE", movie, totalResults} as const),
     setSearchTitle: (title: string) => ({type: 'SET_SEARCH_TITLE', title} as const),
+    setCurrentPage: (currentPage: number) => ({type: 'SET_CURRENT_PAGE', currentPage} as const),
     toggleIsFetching: (isFetching: boolean) => ({type: "SET_TOGGLE_IS_FETCHING", isFetching} as const )
 
 }
@@ -49,8 +51,8 @@ export const actions = {
 export const requestSearchMovie = (title: string, currentPage: number): ThunkType => async (dispatch) => {
     try {
         dispatch(actions.toggleIsFetching(true));
-        let data = await movieAPI.searchMovie(title, currentPage)
-        dispatch(actions.setSearchMovieResult(data.results))
+        let data = await movieAPI.searchMovie(title, currentPage);
+        dispatch(actions.setSearchMovieResult(data.results, data.total_results))
     } catch (e) {
         console.log(e)
     }
