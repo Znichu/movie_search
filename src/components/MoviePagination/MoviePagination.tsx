@@ -12,8 +12,8 @@ export const MoviePagination: React.FC<PropsType> = ({ pagesTotal, onPageChange,
     return (
         <div className={style.pagination}>
             <ReactPaginate
-                previousLabel={'prev'}
-                nextLabel={'next'}
+                previousLabel={'← prev'}
+                nextLabel={'next →'}
                 breakLabel={'...'}
                 breakClassName={'break-me'}
                 pageCount={pagesTotal}
