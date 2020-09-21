@@ -21,7 +21,7 @@ export const movieAPI = {
             .then(res => res.data);
     },
     searchMovie(title: string, currentPage: number = 1) {
-      return instance.get<ResponseMovieType>(`search/movie?api_key=${api_key}&language=en-US&query=Potter&page=${currentPage}&include_adult=false`)
+      return instance.get<ResponseMovieType>(`search/movie?api_key=${api_key}&language=en-US&query=${title}&page=${currentPage}&include_adult=false`)
           .then(res => res.data)
     }
 };
