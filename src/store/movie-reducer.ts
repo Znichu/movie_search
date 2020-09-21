@@ -39,7 +39,8 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
                     ...state.popularMovies,
                     movies: action.movies,
                     totalCount: action.totalCount,
-                    totalPages: action.totalPages
+                    totalPages: action.totalPages,
+                    currentPage: action.currentPage
                 }
             }
         }
@@ -50,7 +51,8 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
                     ...state.upcomingMovies,
                     movies: action.movies,
                     totalCount: action.totalCount,
-                    totalPages: action.totalPages
+                    totalPages: action.totalPages,
+                    currentPage: action.currentPage
                 }
             }
         }
@@ -61,7 +63,8 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
                     ...state.topRatedMovies,
                     movies: action.movies,
                     totalCount: action.totalCount,
-                    totalPages: action.totalPages
+                    totalPages: action.totalPages,
+                    currentPage: action.currentPage
                 }
             }
         }
@@ -84,9 +87,9 @@ export const MoviesReducer = (state = initialState, action: ActionsTypes): Initi
 
 //Actions
 export const actions = {
-    setPopularMovies: (movies: MovieType[], totalCount: number, totalPages: number) => ({ type: "SET_POPULAR_MOVIES", movies, totalCount, totalPages } as const),
-    setUpcomingMovies: (movies: MovieType[], totalCount: number, totalPages: number ) => ({ type: "SET_UPCOMING_MOVIES", movies, totalCount, totalPages } as const),
-    setTopRatedMovies: (movies: MovieType[], totalCount: number, totalPages: number ) => ({ type: "SET_TOP_RATED_MOVIES", movies, totalCount, totalPages } as const),
+    setPopularMovies: (movies: MovieType[], totalCount: number, totalPages: number, currentPage: number) => ({ type: "SET_POPULAR_MOVIES", movies, totalCount, totalPages, currentPage } as const),
+    setUpcomingMovies: (movies: MovieType[], totalCount: number, totalPages: number, currentPage: number ) => ({ type: "SET_UPCOMING_MOVIES", movies, totalCount, totalPages, currentPage } as const),
+    setTopRatedMovies: (movies: MovieType[], totalCount: number, totalPages: number, currentPage: number ) => ({ type: "SET_TOP_RATED_MOVIES", movies, totalCount, totalPages, currentPage } as const),
     setHeroImage: (movie: MovieType ) => ({ type: "SET_HERO_IMAGE", movie } as const),
     setCurrentPage: (numberPage: number) => ({ type: "SET_CURRENT_PAGE", numberPage } as const),
     toggleIsFetching: (isFetching: boolean) => ({ type: "TOGGLE_IS_FETCHING", isFetching } as const),
@@ -95,35 +98,35 @@ export const actions = {
 };
 
 //Thunk
-export const requestPopularMovies = (): ThunkType => async (dispatch) => {
+export const requestPopularMovies = (currentPage?: number): ThunkType => async (dispatch) => {
     try {
         dispatch(actions.toggleIsFetching(true));
-        let data = await movieAPI.getPopularMovies();
-        dispatch(actions.setPopularMovies(data.results, data.total_results, data.total_pages));
+        let data = await movieAPI.getPopularMovies(currentPage);
+        dispatch(actions.setPopularMovies(data.results, data.total_results, data.total_pages, data.page));
     } catch (e) {
         console.log(e.message);
     }
     dispatch(actions.toggleIsFetching(false));
 };
 
-export const requestUpcomingMovies = (): ThunkType => async (dispatch) => {
+export const requestUpcomingMovies = (currentPage?: number): ThunkType => async (dispatch) => {
     let index = Math.floor(Math.random() * (20 + 1 - 1));
     try {
         dispatch(actions.toggleIsFetching(true));
-        const data = await movieAPI.getUpcomingMovies();
+        const data = await movieAPI.getUpcomingMovies(currentPage);
         dispatch(actions.setHeroImage(data.results[index]));
-        dispatch(actions.setUpcomingMovies(data.results, data.total_results, data.total_pages));
+        dispatch(actions.setUpcomingMovies(data.results, data.total_results, data.total_pages, data.page));
     } catch (e) {
         console.log(e.message)
     }
     dispatch(actions.toggleIsFetching(false));
 }
 
-export const requestTopRatedMovies = (): ThunkType => async (dispatch) => {
+export const requestTopRatedMovies = (currentPage?: number): ThunkType => async (dispatch) => {
     try {
         dispatch(actions.toggleIsFetching(true));
-        let data = await movieAPI.getTopRatedMovies();
-        dispatch(actions.setTopRatedMovies(data.results, data.total_results, data.total_pages));
+        let data = await movieAPI.getTopRatedMovies(currentPage);
+        dispatch(actions.setTopRatedMovies(data.results, data.total_results, data.total_pages, data.page));
     } catch (e) {
         console.log(e.message);
     }

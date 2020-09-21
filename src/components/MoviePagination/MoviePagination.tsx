@@ -1,36 +1,31 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
-import Pagination from 'rc-pagination';
 import style from "./Pagination.module.scss"
 
 type PropsType = {
     pagesTotal: number
-    onPageChange: (page: number) => void
+    onPageChange: (e: any) => void
+    currentPage: number
 }
 
-export const MoviePagination: React.FC<PropsType> = ({ pagesTotal, onPageChange}) => {
+export const MoviePagination: React.FC<PropsType> = ({ pagesTotal, onPageChange, currentPage}) => {
     return (
         <div className={style.pagination}>
-{/*            <ReactPaginate
+            <ReactPaginate
                 previousLabel={'prev'}
                 nextLabel={'next'}
                 breakLabel={'...'}
                 breakClassName={'break-me'}
-                pageCount={totalPages}
+                pageCount={pagesTotal}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
                 containerClassName={style.pagination}
                 activeClassName={style.active}
                 previousClassName={style.prev}
                 nextClassName={style.next}
-                initialPage={1}
-            />*/}
-            <Pagination
-                total={pagesTotal}
-                onChange={onPageChange}
-                className={style.pagination}
+                onPageChange={onPageChange}
+                forcePage={currentPage - 1}
             />
-
         </div>
     )
 }

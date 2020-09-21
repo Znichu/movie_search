@@ -3,18 +3,27 @@ import {HeroImage} from "../HeroImage/HeroImage";
 import {BACKDROP_SIZE, IMAGE_BASE_URL} from "../../commons/config";
 import {SearchBar} from "../SearchBar/SearchBar";
 import {StyledGrid, StyledGridContent, StyledHeaderCategory} from "../../styles/StyledGrid";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {MovieCard} from "../MovieCard/MovieCard";
+import {MoviePagination} from "../MoviePagination/MoviePagination";
+import {requestTopRatedMovies} from "../../store/movie-reducer";
 
-export const TopRatedMoviePage = () => {
+export const TopRatedMoviePage = React.memo(() => {
+    const dispatch = useDispatch();
 
+    const {totalPages, currentPage} = useSelector((state: RootState) => state.movie.topRatedMovies)
     const popular = useSelector((state: RootState) => state.movie.heroImage);
     const topRatedMovies = useSelector((state: RootState) => state.movie.topRatedMovies.movies);
     const movieTopRated = topRatedMovies.map(m => <MovieCard img={m.poster_path}
                                                                          title={m.title}
                                                                          rating={m.vote_average}
                                                                          id={m.id}/>);
+
+    const handlePageClick = (e: any) => {
+        const page = e.selected + 1;
+        dispatch(requestTopRatedMovies(page));
+    }
 
     return (
         <>
@@ -30,7 +39,8 @@ export const TopRatedMoviePage = () => {
                 <StyledGridContent>
                     {movieTopRated}
                 </StyledGridContent>
+                <MoviePagination pagesTotal={totalPages} onPageChange={handlePageClick} currentPage={currentPage}/>
             </StyledGrid>
         </>
     )
-}
+})

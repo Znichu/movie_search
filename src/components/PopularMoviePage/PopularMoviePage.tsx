@@ -1,26 +1,29 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {HeroImage} from "../HeroImage/HeroImage";
 import {BACKDROP_SIZE, IMAGE_BASE_URL} from "../../commons/config";
 import {SearchBar} from "../SearchBar/SearchBar";
 import {StyledGrid, StyledGridContent, StyledHeaderCategory} from "../../styles/StyledGrid";
 import {MovieCard} from "../MovieCard/MovieCard";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
-import {MoviePagination} from "../Pagination/Pagination";
+import {MoviePagination} from "../MoviePagination/MoviePagination";
+import {requestPopularMovies} from "../../store/movie-reducer";
 
-export const PopularMoviePage = () => {
+export const PopularMoviePage = React.memo(() => {
+
+    const dispatch = useDispatch();
 
     const popular = useSelector((state: RootState) => state.movie.heroImage);
     const popularMovies = useSelector((state: RootState) => state.movie.popularMovies.movies);
-    const pagesTotal = useSelector((state: RootState) => state.movie.popularMovies.totalPages)
+    const {totalPages, currentPage} = useSelector((state: RootState) => state.movie.popularMovies)
     const moviePopular = popularMovies.map(m => <MovieCard img={m.poster_path}
                                                                        title={m.title}
                                                                        rating={m.vote_average}
                                                                        id={m.id}/>);
 
-    const handlePageClick = (page: number) => {
-
-        console.log(page)
+    const handlePageClick = (e: any) => {
+        const page = e.selected + 1;
+        dispatch(requestPopularMovies(page));
     }
 
     return (
@@ -37,8 +40,8 @@ export const PopularMoviePage = () => {
                 <StyledGridContent>
                     {moviePopular}
                 </StyledGridContent>
-                <MoviePagination onPageChange={handlePageClick}  pagesTotal={pagesTotal}/>
+                <MoviePagination onPageChange={handlePageClick}  pagesTotal={totalPages} currentPage={currentPage}/>
             </StyledGrid>
         </>
     )
-}
+})
