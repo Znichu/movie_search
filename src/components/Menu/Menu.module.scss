@@ -1,78 +1,65 @@
-$p: 12px;
-$n: 5;
-$slate: #fefefe;
-$blue: black;
-
-// container
-.tab__link {
+.wrapper {
   display: flex;
-  position: relative;
-  background: white;
-  border-radius: 2px;
-  // border
-  hr {
-    transition: all 375ms ease-out;
-    // lets the browser know what will happen
-    will-change: transform, background;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    margin: 0;
-    border: 0;
-    border-radius: 2px;
-    height: $p/3;
-    width: calc(100% / #{$n});
-    background: lighten($slate, 50%);
-  }
-  // links
-  a {
-    display: block;
-    width: calc(100% / #{$n});
-    padding: $p*2;
-    text-align: center;
-    text-transform: capitalize;
-    color: #2196F3;
-    font-size: 18px;
-    font-weight: bold;
-    // hover and active color changes
-    &:hover {
-      ~ hr {
-        background: #353535;
-        transition: transform 250ms cubic-bezier(0,.5,.5,1.1), background 250ms ease-out;
-      }
-    }
-    &:active {
-      ~ hr {
-        background: $blue;
-        transition: all 250ms ease-out;
-      }
-    }
-    // loop for transforms, needs to be a different percentage for each link
-    @for $i from 1 through $n {
-      &:nth-child(#{$i}) {
-        &.active {
-          ~ hr {
-            transform: translateX(#{($i - 1) * 100%});
-          }
-        }
-        &:hover, &:focus, &:active {
-          ~ hr, ~ .active ~ hr {
-            transform: translateX(#{($i - 1) * 100%});
-          }
-        }
-      }
-    }
-  }
-}
-
-// additional styling
-
-main {
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  max-width: 800px;
-  padding: $p/2;
-  background: lighten($slate, 75%);
-  @media only screen and (min-width: 800px) {
-    border-radius: 2px;
-  }
+  height: 60px;
+  background-color: #1C1C1C;
 }
+.snip {
+  font-size: 18px;
+  text-align: center;
+  font-weight: 700;
+  margin: 0;
+}
+.snip * {
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.snip li {
+  display: inline-block;
+  list-style: outside none none;
+  margin: 0 1.5em;
+  overflow: hidden;
+}
+.snip a {
+  padding: 0.3em 0;
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  display: inline-block;
+  letter-spacing: 1px;
+  margin: 0;
+  text-decoration: none;
+}
+.snip a:before,
+.snip a:after {
+  position: absolute;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.snip a:before {
+  bottom: 100%;
+  display: block;
+  height: 3px;
+  width: 100%;
+  content: "";
+  background-color: #e67e22;
+}
+.snip a:after {
+  padding: 0.3em 0;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  content: attr(data-hover);
+  color: white;
+  white-space: nowrap;
+}
+.snip li:hover a,
+.snip .current a {
+  transform: translateY(100%);
+}
+
+
+
+
