@@ -4,42 +4,20 @@ import {HeroImage} from "../HeroImage/HeroImage";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {BACKDROP_SIZE, IMAGE_BASE_URL} from "../../commons/config";
-import {StyledGrid, StyledGridContent, StyledHeaderCategory} from "../../styles/StyledGrid";
-import {MovieCard} from "../MovieCard/MovieCard";
-import {Link} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import {SearchMoviePage} from "../SearchMoviePage/SearchMoviePage";
 import {Menu} from "../Menu/Menu";
+import {PopularMoviePage} from "../PopularMoviePage/PopularMoviePage";
+import {TopRatedMoviePage} from "../TopRatedMoviePage/TopRatedMoviePage";
+import {UpcomingMoviePage} from "../UpcomingMoviePage/UpcomingMoviePage";
+import {MovieInfo} from "../MovieInfo/MovieInfo";
 
 
 export const MoviesPage = () => {
 
     const popular = useSelector((state: RootState) => state.movie.heroImage);
-    const popularMovies = useSelector((state: RootState) => state.movie.popularMovies.movies);
-    const topRatedMovies = useSelector((state: RootState) => state.movie.topRatedMovies.movies);
-    const upcomingMovies = useSelector((state: RootState) => state.movie.upcomingMovies.movies);
     const searchTerm = useSelector((state: RootState) => state.searchMovie.searchTerm);
 
-
-    const moviePopular = popularMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
-                                                                       title={m.title}
-                                                                       rating={m.vote_average}
-                                                                       id={m.id}
-                                                                       key={m.id}
-    />);
-
-    const movieTopRated = topRatedMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
-                                                                         title={m.title}
-                                                                         rating={m.vote_average}
-                                                                         id={m.id}
-                                                                         key={m.id}
-    />);
-
-    const movieUpcoming = upcomingMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
-                                                                         title={m.title}
-                                                                         rating={m.vote_average}
-                                                                         id={m.id}
-                                                                         key={m.id}
-    />);
 
     return (
         <>
@@ -53,33 +31,12 @@ export const MoviesPage = () => {
             {searchTerm
                 ? <SearchMoviePage />
                 : <>
-                    <StyledGrid>
-                        <StyledHeaderCategory>
-                            <h1>#Popular</h1>
-                            <Link to="/popular">View all</Link>
-                        </StyledHeaderCategory>
-                        <StyledGridContent>
-                            {moviePopular}
-                        </StyledGridContent>
-                    </StyledGrid>
-                    <StyledGrid>
-                        <StyledHeaderCategory>
-                            <h1>#Top rated</h1>
-                            <Link to="/top-rated">View all</Link>
-                        </StyledHeaderCategory>
-                        <StyledGridContent>
-                            {movieTopRated}
-                        </StyledGridContent>
-                    </StyledGrid>
-                    <StyledGrid>
-                        <StyledHeaderCategory>
-                            <h1>#Upcoming</h1>
-                            <Link to="/upcoming">View all</Link>
-                        </StyledHeaderCategory>
-                        <StyledGridContent>
-                            {movieUpcoming}
-                        </StyledGridContent>
-                    </StyledGrid>
+                    <Switch>
+                        <Route path="/" exact render={() => <PopularMoviePage/>}/>
+                        <Route path="/top-rated" exact render={() => <TopRatedMoviePage/>}/>
+                        <Route path="/upcoming" exact render={() => <UpcomingMoviePage/>}/>
+                        <Route path="/:movieId" exact render={() => <MovieInfo/>}/>
+                    </Switch>
                 </>
             }
         </>
