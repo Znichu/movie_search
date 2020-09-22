@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ResponseMovieType} from "../type/types";
+import {MovieType, ResponseMovieType} from "../type/types";
 
 
 export const instance = axios.create({
@@ -23,5 +23,9 @@ export const movieAPI = {
     searchMovie(title: string, currentPage: number = 1) {
       return instance.get<ResponseMovieType>(`search/movie?api_key=${api_key}&language=en-US&query=${title}&page=${currentPage}&include_adult=false`)
           .then(res => res.data)
+    },
+    getMovieDetails(movieId: number) {
+        return instance.get<MovieType>(`movie/${movieId}?api_key=${api_key}&language=en-US`)
+            .then(res => res.data)
     }
 };

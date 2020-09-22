@@ -1,11 +1,13 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {MoviesReducer} from "./movie-reducer";
+import {MoviesReducer} from "./movies-reducer";
 import thunk from "redux-thunk";
 import {SearchMovieReducer} from "./search-movie-reducer";
+import {MovieInfoReducer} from "./movie-info-reducer";
 
 const rootReducer = combineReducers({
     movie: MoviesReducer,
-    searchMovie: SearchMovieReducer
+    searchMovie: SearchMovieReducer,
+    movieInfo: MovieInfoReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

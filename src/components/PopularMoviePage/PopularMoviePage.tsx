@@ -7,7 +7,7 @@ import {MovieCard} from "../MovieCard/MovieCard";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {MoviePagination} from "../MoviePagination/MoviePagination";
-import {requestPopularMovies} from "../../store/movie-reducer";
+import {requestPopularMovies} from "../../store/movies-reducer";
 
 export const PopularMoviePage = React.memo(() => {
 

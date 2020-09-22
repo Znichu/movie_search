@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {MovieCard} from "../MovieCard/MovieCard";
 import {MoviePagination} from "../MoviePagination/MoviePagination";
-import {requestUpcomingMovies} from "../../store/movie-reducer";
+import {requestUpcomingMovies} from "../../store/movies-reducer";
 
 export const UpcomingMoviePage = () => {
 
