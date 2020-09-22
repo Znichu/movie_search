@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect} from "react";
+import React, {ChangeEvent, useCallback} from "react";
 import searchIcon from "../../assets/img/search-icon.svg"
 import {StyledSearchBar, StyledSearchBarContent} from "../../styles/StyledSearchBar";
 import {useDispatch, useSelector} from "react-redux";
@@ -13,23 +13,21 @@ export const SearchBar = () => {
 
     const sendRequest = () => {
         const term  = searchTerm.replace(/ /g, "%20");
-        console.log(term)
-        dispatch(requestSearchMovie(term, 1))
+        if (term !== "") {
+            dispatch(requestSearchMovie(term, 1))
+        }
     }
 
     const changeSearchTitle = (e: ChangeEvent<HTMLInputElement>) => {
         let term = e.currentTarget.value;
         dispatch(actions.setSearchTitle(term))
+        searchRequest();
+
     }
 
     //search only when there's a gap of 500ms.
     const searchRequest = useCallback(debounce(sendRequest, 500), [searchTerm]);
 
-    useEffect(() => {
-        searchRequest();
-        //return delayedQuery.cancel to cancel previous calls during useEffect cleanup
-        return searchRequest.cancel;
-    }, [searchTerm, searchRequest]);
 
     return (
         <>

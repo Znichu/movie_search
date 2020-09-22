@@ -22,17 +22,23 @@ export const MoviesPage = () => {
     const moviePopular = popularMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
                                                                        title={m.title}
                                                                        rating={m.vote_average}
-                                                                       id={m.id}/>);
+                                                                       id={m.id}
+                                                                       key={m.id}
+    />);
 
     const movieTopRated = topRatedMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
                                                                          title={m.title}
                                                                          rating={m.vote_average}
-                                                                         id={m.id}/>);
+                                                                         id={m.id}
+                                                                         key={m.id}
+    />);
 
     const movieUpcoming = upcomingMovies.slice(0, 6).map(m => <MovieCard img={m.poster_path}
                                                                          title={m.title}
                                                                          rating={m.vote_average}
-                                                                         id={m.id}/>);
+                                                                         id={m.id}
+                                                                         key={m.id}
+    />);
 
     return (
         <>

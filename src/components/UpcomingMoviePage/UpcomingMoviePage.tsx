@@ -7,18 +7,22 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {MovieCard} from "../MovieCard/MovieCard";
 import {MoviePagination} from "../MoviePagination/MoviePagination";
-import {requestTopRatedMovies, requestUpcomingMovies} from "../../store/movie-reducer";
+import {requestUpcomingMovies} from "../../store/movie-reducer";
 
 export const UpcomingMoviePage = () => {
+
     const dispatch = useDispatch();
 
-    const {totalPages, currentPage} = useSelector((state: RootState) => state.movie.upcomingMovies)
+    const {totalPages, currentPage} = useSelector((state: RootState) => state.movie.upcomingMovies);
     const popular = useSelector((state: RootState) => state.movie.heroImage);
     const upcomingMovies = useSelector((state: RootState) => state.movie.upcomingMovies.movies);
+
     const movieUpcoming = upcomingMovies.map(m => <MovieCard img={m.poster_path}
-                                                                         title={m.title}
-                                                                         rating={m.vote_average}
-                                                                         id={m.id}/>);
+                                                             title={m.title}
+                                                             rating={m.vote_average}
+                                                             id={m.id}
+                                                             key={m.id}
+    />);
 
     const handlePageClick = (e: any) => {
         const page = e.selected + 1;

@@ -15,7 +15,12 @@ export const SearchMoviePage: React.FC = React.memo( () => {
     const currentPage = useSelector((state: RootState) => state.searchMovie.currentPage);
     const searchTerm = useSelector((state: RootState) => state.searchMovie.searchTerm )
 
-    const movieElement = searchMovies.map(m => <MovieCard img={m.poster_path} title={m.title} rating={m.vote_average} id={m.id}/>);
+    const movieElement = searchMovies.map(m => <MovieCard img={m.poster_path}
+                                                          title={m.title}
+                                                          rating={m.vote_average}
+                                                          id={m.id}
+                                                          key={m.id}
+    />);
 
     const changeMoviePage = (e: any) => {
         const page = e.selected + 1;

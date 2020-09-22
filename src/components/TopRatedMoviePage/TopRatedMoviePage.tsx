@@ -16,9 +16,11 @@ export const TopRatedMoviePage = React.memo(() => {
     const popular = useSelector((state: RootState) => state.movie.heroImage);
     const topRatedMovies = useSelector((state: RootState) => state.movie.topRatedMovies.movies);
     const movieTopRated = topRatedMovies.map(m => <MovieCard img={m.poster_path}
-                                                                         title={m.title}
-                                                                         rating={m.vote_average}
-                                                                         id={m.id}/>);
+                                                             title={m.title}
+                                                             rating={m.vote_average}
+                                                             id={m.id}
+                                                             key={m.id}
+    />);
 
     const handlePageClick = (e: any) => {
         const page = e.selected + 1;
