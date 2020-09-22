@@ -8,6 +8,7 @@ import {StyledGrid, StyledGridContent, StyledHeaderCategory} from "../../styles/
 import {MovieCard} from "../MovieCard/MovieCard";
 import {Link} from "react-router-dom";
 import {SearchMoviePage} from "../SearchMoviePage/SearchMoviePage";
+import {Menu} from "../Menu/Menu";
 
 
 export const MoviesPage = () => {
@@ -48,6 +49,7 @@ export const MoviesPage = () => {
             />
             }
             <SearchBar/>
+            <Menu/>
             {searchTerm
                 ? <SearchMoviePage />
                 : <>

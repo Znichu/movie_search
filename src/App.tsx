@@ -9,6 +9,7 @@ import {PopularMoviePage} from "./components/PopularMoviePage/PopularMoviePage";
 import {TopRatedMoviePage} from "./components/TopRatedMoviePage/TopRatedMoviePage";
 import {UpcomingMoviePage} from "./components/UpcomingMoviePage/UpcomingMoviePage";
 import {MovieInfo} from "./components/MovieInfo/MovieInfo";
+import {Menu} from "./components/Menu/Menu";
 
 export const App = () => {
     const dispatch = useDispatch();
