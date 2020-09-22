@@ -12,7 +12,9 @@ export const SearchBar = () => {
     const searchTerm = useSelector((state: RootState) => state.searchMovie.searchTerm);
 
     const sendRequest = () => {
-        dispatch(requestSearchMovie(searchTerm, 1))
+        const term  = searchTerm.replace(/ /g, "%20");
+        console.log(term)
+        dispatch(requestSearchMovie(term, 1))
     }
 
     const changeSearchTitle = (e: ChangeEvent<HTMLInputElement>) => {
