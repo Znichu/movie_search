@@ -1,7 +1,7 @@
 $p: 12px;
 $n: 5;
 $slate: #fefefe;
-$blue: #243;
+$blue: black;
 
 // container
 .tab__link {
@@ -31,10 +31,13 @@ $blue: #243;
     padding: $p*2;
     text-align: center;
     text-transform: capitalize;
+    color: #2196F3;
+    font-size: 18px;
+    font-weight: bold;
     // hover and active color changes
     &:hover {
       ~ hr {
-        background: mix(lighten($slate, 50%), $blue, 75%);
+        background: #353535;
         transition: transform 250ms cubic-bezier(0,.5,.5,1.1), background 250ms ease-out;
       }
     }
