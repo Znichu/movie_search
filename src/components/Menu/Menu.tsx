@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Menu.module.scss"
-import {Link, NavLink, useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 export const Menu = () => {
 
@@ -18,9 +18,6 @@ export const Menu = () => {
                 <li className={location.pathname === '/upcoming' ? style.current : ""}>
                     <Link to={"/upcoming"} data-hover="Upcoming">Upcoming</Link>
                 </li>
-                <li><a href="#" data-hover="Services">Services</a></li>
-                <li><a href="#" data-hover="Products">Products</a></li>
-                <li><a href="#" data-hover="Contact">Contact</a></li>
             </ul>
         </div>
     )
