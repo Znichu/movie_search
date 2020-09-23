@@ -3,14 +3,15 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css"
-import {useSelector} from "react-redux";
-import {RootState} from "../../store/store";
 import {BACKDROP_SIZE, IMAGE_BASE_URL} from "../../commons/config";
 import {HeroImage} from "../HeroImage/HeroImage";
+import {MovieType} from "../../type/types";
 
-export const MainSlider = () => {
+type PropsType = {
+    heroImage: MovieType[]
+}
 
-    const movie = useSelector((state: RootState) => state.movie.movies);
+export const MainSlider: React.FC<PropsType> = ({heroImage}) => {
 
     const settings = {
         arrows: false,
@@ -27,7 +28,7 @@ export const MainSlider = () => {
     return (
         <Slider {...settings}>
             {
-                movie.map(m => <HeroImage image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${m.backdrop_path}`}
+                heroImage.slice(0, 6).map(m => <HeroImage image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${m.backdrop_path}`}
                                           title={m.title}
                                           text={m.overview}
                 />)

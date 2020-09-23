@@ -8,19 +8,23 @@ export const instance = axios.create({
 const api_key = process.env.REACT_APP_API_KEY;
 
 export const movieAPI = {
-    getPopularMovies(currentPage: number = 1) {
+    getPopularMovies(currentPage: number ) {
         return instance.get<ResponseMovieType>(`movie/popular?api_key=${api_key}&language=en-US&page=${currentPage}`)
             .then(res => res.data);
     },
-    getUpcomingMovies(currentPage: number = 1) {
+    getUpcomingMovies(currentPage: number ) {
         return instance.get<ResponseMovieType>(`movie/upcoming?api_key=${api_key}&language=en-US&page=${currentPage}`)
             .then(res => res.data);
     },
-    getTopRatedMovies(currentPage: number = 1) {
+    getTopRatedMovies(currentPage: number ) {
         return instance.get<ResponseMovieType>(`movie/top_rated?api_key=${api_key}&language=en-US&page=${currentPage}`)
             .then(res => res.data);
     },
-    searchMovie(title: string, currentPage: number = 1) {
+    getNowPlayingMovies(currentPage: number){
+        return instance.get<ResponseMovieType>(`movie/now_playing?api_key=${api_key}&language=en-US&page=${currentPage}`)
+            .then(res => res.data)
+    },
+    searchMovie(title: string, currentPage: number ) {
       return instance.get<ResponseMovieType>(`search/movie?api_key=${api_key}&language=en-US&query=${title}&page=${currentPage}&include_adult=false`)
           .then(res => res.data)
     },

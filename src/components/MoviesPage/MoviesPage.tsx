@@ -1,9 +1,7 @@
 import React from "react";
 import {SearchBar} from "../SearchBar/SearchBar";
-import {HeroImage} from "../HeroImage/HeroImage";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
-import {BACKDROP_SIZE, IMAGE_BASE_URL} from "../../commons/config";
 import {Route, Switch} from "react-router-dom";
 import {SearchMoviePage} from "../SearchMoviePage/SearchMoviePage";
 import {Menu} from "../Menu/Menu";
@@ -16,13 +14,13 @@ import {MainSlider} from "../Slider/Slider";
 
 export const MoviesPage = () => {
 
-    const popular = useSelector((state: RootState) => state.movie.heroImage);
+    const heroImage = useSelector((state: RootState) => state.movie.heroImage);
     const searchTerm = useSelector((state: RootState) => state.searchMovie.searchTerm);
 
 
     return (
         <>
-            {!searchTerm && <MainSlider/>}
+            {!searchTerm && <MainSlider heroImage={heroImage}/>}
             <SearchBar/>
             <Menu/>
             {searchTerm
