@@ -11,6 +11,7 @@ import {PopularMoviePage} from "../PopularMoviePage/PopularMoviePage";
 import {TopRatedMoviePage} from "../TopRatedMoviePage/TopRatedMoviePage";
 import {UpcomingMoviePage} from "../UpcomingMoviePage/UpcomingMoviePage";
 import {MovieInfo} from "../MovieInfo/MovieInfo";
+import {MainSlider} from "../Slider/Slider";
 
 
 export const MoviesPage = () => {
@@ -21,11 +22,7 @@ export const MoviesPage = () => {
 
     return (
         <>
-            {!searchTerm && <HeroImage image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${popular.backdrop_path}`}
-                                       title={popular.title}
-                                       text={popular.overview}
-            />
-            }
+            {!searchTerm && <MainSlider/>}
             <SearchBar/>
             <Menu/>
             {searchTerm
