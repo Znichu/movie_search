@@ -16,19 +16,17 @@ export const MovieCard: React.FC<PropsType> = (props) => {
     const {img, title, rating, id} = props;
 
     return (
-        <div className={s.card}>
-            <div className={s.card__header}>
-                <img src={ img ? `${IMAGE_BASE_URL}${POSTER_SIZE}${img}` : noPoster} alt=""/>
+            <div className={s.wrapper}>
+                <figure className={s.movie__card}>
+                    <img src={img ? `${IMAGE_BASE_URL}${POSTER_SIZE}${img}` : noPoster} alt=""/>
+                    <figcaption>
+                        <h4>{title}</h4>
+                        <div className={s.rating}>
+                            <i style={{color: "rgb(250, 80, 80)", marginRight: "5px"}} className="fa fa-heart"></i>
+                            <h4>{rating}</h4>
+                        </div>
+                    </figcaption>
+                </figure>
             </div>
-            <div className={s.card__content}>
-                <div className={s.head}>
-                    <Link to={"/" + id}><h3>{title}</h3></Link>
-                    <div className={s.rating}>
-                        <span>{rating}</span>/10
-                    </div>
-                </div>
-            </div>
-
-        </div>
     )
 }

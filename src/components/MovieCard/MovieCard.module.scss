@@ -48,3 +48,43 @@
     }
   }
 }
+.wrapper {
+  margin: 10px 15px;
+}
+.movie__card {
+  background-color: #fefefe;
+  width: 16em;
+  margin: .50em;
+  box-shadow: 0 5px 15px gray;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 -3px 20px gray;
+  }
+  img {
+    width: 16em;
+    height: 23em;
+  }
+  figcaption {
+    padding: 0 .80em;
+    height: 70px;
+    h5 {
+      text-transform: uppercase;
+      color: #1C1C1C;
+      margin: 5px 0 0 0;
+    }
+    h4 {
+      color: #1C1C1C;
+      margin: 0;
+    }
+    .rating {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+  }
+}
