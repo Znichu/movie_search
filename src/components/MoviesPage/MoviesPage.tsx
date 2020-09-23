@@ -22,9 +22,11 @@ export const MoviesPage = () => {
         <>
             {!searchTerm && <MainSlider heroImage={heroImage}/>}
             <SearchBar/>
-            <Menu/>
+            {!searchTerm && <Menu/>}
             {searchTerm
-                ? <SearchMoviePage />
+                ? <>
+                    <SearchMoviePage/>
+                </>
                 : <>
                     <Switch>
                         <Route path="/" exact render={() => <PopularMoviePage/>}/>

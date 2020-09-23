@@ -13,6 +13,15 @@ export type MovieType = {
     vote_average: number
     overview: string
     release_date: number
+    genres: GenresType[]
+    tagline: string
+    budget: number
+    runtime: number
+}
+
+type GenresType = {
+    id: number
+    name: string
 }
 
 export type ResponseMovieType = {

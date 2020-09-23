@@ -4,13 +4,15 @@ import {GlobalStyle} from "./styles/GlobalStyle";
 import {MoviesPage} from "./components/MoviesPage/MoviesPage";
 import {useDispatch} from "react-redux";
 import {requestNowPlayingMovies} from "./store/movies-reducer";
+import {Route, Switch} from "react-router-dom";
+import {MovieInfo} from "./components/MovieInfo/MovieInfo";
 
 export const App = () => {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(requestNowPlayingMovies(1))
+        dispatch(requestNowPlayingMovies(2))
     }, [dispatch]);
 
     return (

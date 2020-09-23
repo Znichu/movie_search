@@ -1,9 +1,13 @@
 import React, {useEffect} from "react";
 import {Content, Wrapper, Text} from "../../styles/MovieInfo.styles";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {requestMovieDetails} from "../../store/movie-info-reducer";
-import {RootState} from "../../store/store";
+import {RootState} from "../../store/store"
+import {Image} from '../../styles/Image.styles';
+import {IMAGE_BASE_URL, POSTER_SIZE} from "../../commons/config";
+import noImage from "../../assets/img/no_image.jpg"
+import {calcTime} from "../../commons/helpers";
 
 
 export const MovieInfo = () => {
@@ -20,18 +24,20 @@ export const MovieInfo = () => {
 
         <Wrapper backdrop={movie.backdrop_path}>
             <Content>
-{/*                <Thumb
-                    image={
-                        movie.poster_path
-                            ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
-                            : NoImage
-                    }
-                    clickable={false}
-                    alt='movie-thumb'
-                />*/}
+                <Image src={movie.poster_path
+                    ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
+                    : noImage
+                }
+                       alt='movie-thumb'
+                />
                 <Text>
                     <h1>{movie.title}</h1>
-                    <h3>PLOT</h3>
+                    <div>
+                        <span>Release: {movie.release_date}</span>
+                        <span className="runtime">Running time: {calcTime(movie.runtime)}</span>
+                    </div>
+                    <h3 className="tagline">{movie.tagline}</h3>
+                    <h3>Overview</h3>
                     <p>{movie.overview}</p>
 
                     <div className='rating-directors'>
@@ -39,12 +45,6 @@ export const MovieInfo = () => {
                             <h3>RATING</h3>
                             <div className='score'>{movie.vote_average}</div>
                         </div>
-{/*                        <div className='director'>
-                            <h3>DIRECTOR{movie.directors.length > 1 ? 'S' : ''}</h3>
-                            {movie.directors.map(director => (
-                                <p key={director.credit_id}>{director.name}</p>
-                            ))}
-                        </div>*/}
                     </div>
                 </Text>
             </Content>

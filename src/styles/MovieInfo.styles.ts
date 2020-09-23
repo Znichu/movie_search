@@ -62,4 +62,14 @@ export const Text = styled.div`
       font-size: var(--fontBig);
     }
   }
+  .tagline {
+    margin-bottom: 0;
+    font-size: 1.1em;
+    font-weight: 400;
+    font-style: italic;
+    opacity: 0.7;
+  }
+  .runtime {
+    padding-left: 20px;
+  }
 `;
