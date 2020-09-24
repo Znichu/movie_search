@@ -10,6 +10,7 @@ import {TopRatedMoviePage} from "../TopRatedMoviePage/TopRatedMoviePage";
 import {UpcomingMoviePage} from "../UpcomingMoviePage/UpcomingMoviePage";
 import {MovieInfo} from "../MovieInfo/MovieInfo";
 import {MainSlider} from "../Slider/Slider";
+import {Modal} from "../Modal/Modal";
 
 
 export const MoviesPage = () => {
@@ -28,12 +29,10 @@ export const MoviesPage = () => {
                     <SearchMoviePage/>
                 </>
                 : <>
-                    <Switch>
-                        <Route path="/" exact render={() => <PopularMoviePage/>}/>
-                        <Route path="/top-rated" exact render={() => <TopRatedMoviePage/>}/>
-                        <Route path="/upcoming" exact render={() => <UpcomingMoviePage/>}/>
-                        <Route path="/:movieId" exact render={() => <MovieInfo/>}/>
-                    </Switch>
+                    <Route path="/" exact render={() => <PopularMoviePage/>}/>
+                    <Route path="/top-rated" exact render={() => <TopRatedMoviePage/>}/>
+                    <Route path="/upcoming" exact render={() => <UpcomingMoviePage/>}/>
+                    {/*<Route path="/:movieId" exact render={() => <MovieInfo/>}/>*/}
                 </>
             }
         </>

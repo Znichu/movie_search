@@ -1,0 +1,32 @@
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+  &__content {
+    margin: 10% auto;
+    padding: 50px 30px 30px 30px;
+    width: 80%;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.7);
+    position: relative;
+    .close {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      color:white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      &:hover,
+      &:focus {
+        color: #e67e22;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+  }
+}

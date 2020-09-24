@@ -9,10 +9,12 @@ import {IMAGE_BASE_URL, POSTER_SIZE} from "../../commons/config";
 import noImage from "../../assets/img/no_image.jpg"
 import {calcTime} from "../../commons/helpers";
 
+type PropsType = {
+    movieId: number
+}
 
-export const MovieInfo = () => {
+export const MovieInfo: React.FC<PropsType> = ({movieId}) => {
     const dispatch = useDispatch();
-    const {movieId} = useParams();
 
     useEffect(() => {
         dispatch(requestMovieDetails(movieId))
