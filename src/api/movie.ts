@@ -29,7 +29,7 @@ export const movieAPI = {
           .then(res => res.data)
     },
     getMovieDetails(movieId: number) {
-        return instance.get<MovieType>(`movie/${movieId}?api_key=${api_key}&language=en-US`)
+        return instance.get<MovieType>(`movie/${movieId}?api_key=${api_key}&language=en-US&append_to_response=videos,credits`)
             .then(res => res.data)
     }
 };
