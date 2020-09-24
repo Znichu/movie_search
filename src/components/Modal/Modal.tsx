@@ -8,6 +8,7 @@ type PropsType = {
 }
 
 export const Modal: React.FC<PropsType> = ({movieId, closeModal}) => {
+
     return (
         <div className={style.modal}>
             <div className={style.modal__content}>

@@ -16,10 +16,22 @@ export type MovieType = {
     genres: GenresType[]
     tagline: string
     budget: number
-    runtime: number
+    runtime: number,
+    credits: {
+        crew: CrewItemType[]
+    }
 }
 
-type GenresType = {
+export type CrewItemType = {
+    credit_id: string
+    department: string
+    gender: number
+    id: number
+    job: string
+    name: string
+    profile_path: null | string
+}
+export type GenresType = {
     id: number
     name: string
 }

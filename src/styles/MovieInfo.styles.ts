@@ -69,7 +69,11 @@ export const Text = styled.div`
     font-style: italic;
     opacity: 0.7;
   }
-  .runtime {
-    padding-left: 20px;
+  .facts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    line-height: 2;
   }
 `;

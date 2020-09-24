@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import s from "./MovieCard.module.scss"
 import noPoster from "../../assets/img/no_image.jpg"
 import {IMAGE_BASE_URL, POSTER_SIZE} from "../../commons/config";
-import {Link} from "react-router-dom";
 import {textTruncate} from "../../commons/helpers";
 import {Modal} from "../Modal/Modal";
 
@@ -40,7 +39,7 @@ export const MovieCard: React.FC<PropsType> = (props) => {
                         </figcaption>
                     </figure>
             </div>
-            {showModal && <Modal movieId={id} closeModal={closeModal}/>}
+            {showModal &&  <Modal movieId={id} closeModal={closeModal}/>}
 
         </>
     )

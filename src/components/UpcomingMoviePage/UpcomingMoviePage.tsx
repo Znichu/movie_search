@@ -5,6 +5,7 @@ import {RootState} from "../../store/store";
 import {MovieCard} from "../MovieCard/MovieCard";
 import {MoviePagination} from "../MoviePagination/MoviePagination";
 import {requestUpcomingMovies} from "../../store/movies-reducer";
+import {Spinner} from "../../styles/Spinner.styles";
 
 export const UpcomingMoviePage = () => {
 
@@ -12,10 +13,11 @@ export const UpcomingMoviePage = () => {
 
     useEffect(() => {
         dispatch(requestUpcomingMovies(1));
-    }, [])
+    }, [dispatch])
 
     const {totalPages, currentPage} = useSelector((state: RootState) => state.movie);
     const upcomingMovies = useSelector((state: RootState) => state.movie.movies);
+    const isFetching = useSelector((state: RootState) => state.movie.isFetching);
 
     const movieUpcoming = upcomingMovies.map(m => <MovieCard img={m.poster_path}
                                                              title={m.title}
@@ -28,6 +30,8 @@ export const UpcomingMoviePage = () => {
         const page = e.selected + 1;
         dispatch(requestUpcomingMovies(page));
     }
+
+    if (isFetching) return <Spinner/>
 
     return (
         <>
