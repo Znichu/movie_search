@@ -40,7 +40,6 @@ export const MovieCard: React.FC<PropsType> = (props) => {
                     </figure>
             </div>
             {showModal &&  <ModalMovieInfo movieId={id} closeModal={closeModal}/>}
-
         </>
     )
 }

@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {StyledGrid, StyledGridContent} from "../../styles/StyledGrid";
+import {Grid, GridContent} from "../../styles/Grid";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {MovieCard} from "../MovieCard/MovieCard";
@@ -34,12 +34,12 @@ export const TopRatedMoviePage = React.memo(() => {
 
     return (
         <>
-            <StyledGrid>
-                <StyledGridContent>
+            <Grid>
+                <GridContent>
                     {movieTopRated}
-                </StyledGridContent>
+                </GridContent>
                 <MoviePagination pagesTotal={totalPages} onPageChange={handlePageClick} currentPage={currentPage}/>
-            </StyledGrid>
+            </Grid>
         </>
     )
 })

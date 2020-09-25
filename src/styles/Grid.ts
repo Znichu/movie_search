@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledGrid = styled.div`
+export const Grid = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,7 +9,7 @@ export const StyledGrid = styled.div`
   padding: 0 50px;
 `;
 
-export const StyledGridContent = styled.div`
+export const GridContent = styled.div`
   position: relative;
   display: flex;
   flex-wrap: wrap;

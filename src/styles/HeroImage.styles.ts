@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-export const StyledHeroImage = styled.div<{image: string}>`
+export const HeroImageStyles = styled.div<{image: string}>`
   background: ${props =>
     `linear-gradient(
       to bottom, rgba(0,0,0,0)

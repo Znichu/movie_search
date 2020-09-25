@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useCallback} from "react";
 import searchIcon from "../../assets/img/search-icon.svg"
-import {StyledSearchBar, StyledSearchBarContent} from "../../styles/StyledSearchBar";
+import {SearchBarStyles, StyledSearchBarContent} from "../../styles/SearchBar.styles";
 import {useDispatch, useSelector} from "react-redux";
 import {actions, requestSearchMovie} from "../../store/search-movie-reducer";
 import {RootState} from "../../store/store";
@@ -31,7 +31,7 @@ export const SearchBar = () => {
 
     return (
         <>
-            <StyledSearchBar>
+            <SearchBarStyles>
                 <StyledSearchBarContent>
                     <img src={searchIcon} alt="icon"/>
                     <input type="text"
@@ -39,7 +39,7 @@ export const SearchBar = () => {
                            onChange={changeSearchTitle}
                            value={searchTerm}/>
                 </StyledSearchBarContent>
-            </StyledSearchBar>
+            </SearchBarStyles>
         </>
     )
 }

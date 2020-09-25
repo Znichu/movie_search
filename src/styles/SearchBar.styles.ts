@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledSearchBar = styled.div`
+export const SearchBarStyles = styled.div`
   display: flex;
   align-items: center;
   height: 100px;
