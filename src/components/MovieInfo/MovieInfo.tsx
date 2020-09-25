@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
-import {Content, Wrapper, Text} from "../../styles/MovieInfo.styles";
-import {useParams} from "react-router-dom";
+import {Content, Text, Wrapper} from "../../styles/MovieInfo.styles";
 import {useDispatch, useSelector} from "react-redux";
 import {requestMovieDetails} from "../../store/movie-info-reducer";
 import {RootState} from "../../store/store"
@@ -8,7 +7,6 @@ import {Image} from '../../styles/Image.styles';
 import {IMAGE_BASE_URL, POSTER_SIZE} from "../../commons/config";
 import noImage from "../../assets/img/no_image.jpg"
 import {calcTime, convertMoney} from "../../commons/helpers";
-import ReactPlayer from "react-player";
 
 type PropsType = {
     movieId: number
@@ -48,6 +46,12 @@ export const MovieInfo: React.FC<PropsType> = React.memo( ({movieId}) => {
                         <div>
                             <h3>RATING</h3>
                             <div className='score'>{movie.vote_average}</div>
+                        </div>
+                        <div className='director'>
+                            <h3>DIRECTOR{directors.length > 1 ? 'S' : ''}</h3>
+                            {directors.map(director => (
+                                <p key={director.credit_id}>{director.name}</p>
+                            ))}
                         </div>
                     </div>
                 </Text>

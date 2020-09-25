@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./Modal.module.scss"
+import style from "./ModalMovieInfo.module.scss"
 import {MovieInfo} from "../MovieInfo/MovieInfo";
 
 type PropsType = {
@@ -7,7 +7,7 @@ type PropsType = {
     closeModal: () => void
 }
 
-export const Modal: React.FC<PropsType> = ({movieId, closeModal}) => {
+export const ModalMovieInfo: React.FC<PropsType> = ({movieId, closeModal}) => {
 
     return (
         <div className={style.modal}>

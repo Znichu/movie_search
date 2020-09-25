@@ -28,9 +28,10 @@ export const MainSlider: React.FC<PropsType> = ({heroImage}) => {
     return (
         <Slider {...settings}>
             {
-                heroImage.slice(0, 6).map(m => <HeroImage image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${m.backdrop_path}`}
-                                          title={m.title}
-                                          text={m.overview}
+                heroImage.slice(0, 6).map(m => <HeroImage key={m.id}
+                                                          image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${m.backdrop_path}`}
+                                                          title={m.title}
+                                                          text={m.overview}
                 />)
             }
         </Slider>

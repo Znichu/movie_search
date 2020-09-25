@@ -3,7 +3,7 @@ import s from "./MovieCard.module.scss"
 import noPoster from "../../assets/img/no_image.jpg"
 import {IMAGE_BASE_URL, POSTER_SIZE} from "../../commons/config";
 import {textTruncate} from "../../commons/helpers";
-import {Modal} from "../Modal/Modal";
+import {ModalMovieInfo} from "../ModalMovieInfo/ModalMovieInfo";
 
 type PropsType = {
     img: string
@@ -39,7 +39,7 @@ export const MovieCard: React.FC<PropsType> = (props) => {
                         </figcaption>
                     </figure>
             </div>
-            {showModal &&  <Modal movieId={id} closeModal={closeModal}/>}
+            {showModal &&  <ModalMovieInfo movieId={id} closeModal={closeModal}/>}
 
         </>
     )
